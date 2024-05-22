@@ -17,7 +17,7 @@ map.lua
 menu.lua
 minimap.lua
 nameplates.lua
+player.lua
 playercheck.lua
-playerframe.lua
-targetframe.lua
+target.lua
 tooltip.lua
