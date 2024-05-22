@@ -1,0 +1,188 @@
+local function ActionBarUpdate()
+    MainMenuBar:SetWidth(512)
+    MainMenuBar:ClearAllPoints()
+    MainMenuBar:SetPoint("BOTTOM", UIParent, "BOTTOM", -2, 64)
+    MainMenuBar:SetMovable(true)
+    MainMenuBar:SetUserPlaced(true)
+
+    MultiBarBottomLeft:Show()
+    MultiBarBottomLeft:ClearAllPoints()
+    MultiBarBottomLeft:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 110)
+    MultiBarBottomLeft:SetMovable(true)
+    MultiBarBottomLeft:SetUserPlaced(true)
+
+    MultiBarBottomRight:Show()
+    MultiBarBottomRight:ClearAllPoints()
+    MultiBarBottomRight:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+    MultiBarBottomRight:SetMovable(true)
+    MultiBarBottomRight:SetUserPlaced(true)
+    MultiBarBottomRight:SetScale(0.8)
+
+    MultiBarRight:ClearAllPoints()
+    MultiBarRight:SetPoint("RIGHT", UIParent, "RIGHT", -16, 0)
+    MultiBarRight:SetMovable(true)
+    MultiBarRight:SetUserPlaced(true)
+
+    MultiBarLeft:ClearAllPoints()
+    MultiBarLeft:SetPoint("RIGHT", MultiBarRight, "LEFT", -2, 0)
+    MultiBarLeft:SetMovable(true)
+    MultiBarLeft:SetUserPlaced(true)
+
+    MainMenuBarLeftEndCap:Hide()
+    MainMenuBarRightEndCap:Hide()
+    MainMenuBarPageNumber:Hide()
+    ActionBarUpButton:Hide()
+    ActionBarDownButton:Hide()
+    MainMenuBarTexture0:Hide()
+    MainMenuBarTexture1:Hide()
+    MainMenuBarTexture2:Hide()
+    MainMenuBarTexture3:Hide()
+    MainMenuMaxLevelBar0:Hide()
+    MainMenuMaxLevelBar1:Hide()
+    MainMenuMaxLevelBar2:Hide()
+    MainMenuMaxLevelBar3:Hide()
+    MainMenuBarMaxLevelBar:Hide()
+    MainMenuBarOverlayFrame:Hide()
+    SlidingActionBarTexture0:Hide()
+    SlidingActionBarTexture0.Show = SlidingActionBarTexture0.Hide
+    SlidingActionBarTexture1:Hide()
+    SlidingActionBarTexture1.Show = SlidingActionBarTexture1.Hide
+    MainMenuBarPerformanceBarFrame:Hide()
+    MainMenuBarPerformanceBar:Hide()
+end
+
+local ActionBarEvents = CreateFrame("Frame")
+ActionBarEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+ActionBarEvents:SetScript("OnEvent", ActionBarUpdate)
+
+
+
+
+function ActionButtonUpdate(self)
+    if self.action then
+        local ActionRange = IsActionInRange(self.action)
+        local ActionUsability = IsUsableAction(self.action)
+        
+        if not ActionUsability or ActionRange == false then
+            self.icon:SetVertexColor(0.5, 0.5, 0.5, 1)
+        else
+            self.icon:SetVertexColor(1, 1, 1, 1)
+        end
+    end
+end
+
+hooksecurefunc("ActionButton_OnUpdate", ActionButtonUpdate)
+
+
+
+
+local function PetBarUpdate()
+    local PreviousPetButton
+
+    for i = 1, 10 do
+        local PetButton = _G["PetActionButton" .. i]
+        PetButton:ClearAllPoints()
+
+        if not PreviousPetButton then
+            PetButton:SetPoint("BOTTOMLEFT", MultiBarBottomLeft, "TOPLEFT", 0, 4)
+        else
+            PetButton:SetPoint("LEFT", PreviousPetButton, "RIGHT", 4, 0)
+        end
+
+        PetButton:SetScale(0.8)
+        PetButton:SetAlpha(0.5)
+        PetButton:Show()
+
+        PreviousPetButton = PetButton
+    end
+end
+
+local PetBarEvents = CreateFrame("Frame")
+PetBarEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+PetBarEvents:RegisterEvent("UNIT_PET")
+PetBarEvents:RegisterEvent("PET_BAR_UPDATE")
+PetBarEvents:SetScript("OnEvent", PetBarUpdate)
+
+
+
+
+local function ClassBarUpdate()
+    local PreviousClassButton
+
+    for i = 1, NUM_STANCE_SLOTS do
+        local ClassButton = _G["StanceButton" .. i]
+        
+        ClassButton:ClearAllPoints()
+
+        if not PreviousClassButton then
+            ClassButton:SetPoint("BOTTOMLEFT", MultiBarBottomLeft, "TOPLEFT", 0, 4)
+        else
+            ClassButton:SetPoint("LEFT", PreviousClassButton, "RIGHT", 4, 0)
+        end
+
+        ClassButton:SetScale(0.8)
+        ClassButton:SetAlpha(0.5)
+
+        PreviousClassButton = ClassButton
+    end
+
+    PossessBarFrame:UnregisterAllEvents()
+end
+
+local ClassBarEvents = CreateFrame("Frame")
+ClassBarEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+ClassBarEvents:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
+ClassBarEvents:RegisterEvent("UPDATE_SHAPESHIFT_USABLE")
+ClassBarEvents:RegisterEvent("UPDATE_SHAPESHIFT_COOLDOWN")
+ClassBarEvents:SetScript("OnEvent", ClassBarUpdate)
+
+
+
+
+local function ExperienceBarHide()
+    MainMenuExpBar:Hide()
+    MainMenuExpBar:SetAlpha(0)
+    MainMenuXPBarTexture0:Hide()
+    MainMenuXPBarTexture1:Hide()
+    MainMenuXPBarTexture2:Hide()
+    MainMenuXPBarTexture3:Hide()
+end
+
+MainMenuExpBar:HookScript("OnShow", ExperienceBarHide)
+
+local ExperienceBarEvents = CreateFrame("Frame")
+ExperienceBarEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+ExperienceBarEvents:RegisterEvent("PLAYER_LEVEL_UP")
+ExperienceBarEvents:RegisterEvent("PLAYER_XP_UPDATE")
+ExperienceBarEvents:RegisterEvent("UPDATE_EXHAUSTION")
+ExperienceBarEvents:SetScript("OnEvent", ExperienceBarHide)
+
+
+
+
+local function ReputationBarHide()
+    ReputationWatchBar.StatusBar:Hide()
+    ReputationWatchBar.OverlayFrame:Hide()
+    ReputationWatchBar.StatusBar.WatchBarTexture0:Hide()
+    ReputationWatchBar.StatusBar.WatchBarTexture1:Hide()
+    ReputationWatchBar.StatusBar.WatchBarTexture2:Hide()
+    ReputationWatchBar.StatusBar.WatchBarTexture3:Hide()
+end
+
+ReputationWatchBar.StatusBar:HookScript("OnShow", ReputationBarHide)
+
+local ReputationBarEvents = CreateFrame("Frame")
+ReputationBarEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+ReputationBarEvents:RegisterEvent("UPDATE_FACTION")
+ReputationBarEvents:SetScript("OnEvent", ReputationBarHide)
+
+
+
+
+local function VehicleButtonUpdate()
+    MainMenuBarVehicleLeaveButton:SetSize(32, 32)
+    MainMenuBarVehicleLeaveButton:ClearAllPoints()
+    MainMenuBarVehicleLeaveButton:SetPoint("BOTTOM", CastingBarFrame, "BOTTOM", 0, 0)
+end
+
+MainMenuBarVehicleLeaveButton:HookScript("OnShow", VehicleButtonUpdate)
