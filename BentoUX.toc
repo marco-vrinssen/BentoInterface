@@ -1,23 +1,23 @@
 ## Interface: 11600
-## Title: Bento UI
+## Title: Bento UX
 ## Notes: Extensive, resource-efficient improvements to the user interface and experience.
 ## Version: 1.0
 ## Author: MIYANKO
 
-Modules/Actionbars.lua
-Modules/Auras.lua
-Modules/Bags.lua
-Modules/Castbar.lua
-Modules/Chat.lua
-Modules/ComboPoints.lua
-Modules/Commands.lua
-Modules/Config.lua
-Modules/Items.lua
-Modules/Map.lua
-Modules/Micromenu.lua
-Modules/Minimap.lua
-Modules/Nameplates.lua
-Modules/Player.lua
-Modules/PlayerCheck.lua
-Modules/Target.lua
-Modules/Tooltip.lua
+actionbars.lua
+auras.lua
+bags.lua
+castbar.lua
+chat.lua
+combopoints.lua
+commands.lua
+config.lua
+items.lua
+map.lua
+menu.lua
+minimap.lua
+nameplates.lua
+playercheck.lua
+playerframe.lua
+targetframe.lua
+tooltip.lua
