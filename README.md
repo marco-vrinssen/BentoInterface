@@ -1,4 +1,4 @@
-# Bento UX 1.0
+# Bento UI
 
 ## Addon for World of Warcraft Classic with extensive, resource-efficient improvements to the user interface and experience.
 
