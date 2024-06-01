@@ -1,8 +1,8 @@
 # Bento UI
 
-## Addon for World of Warcraft Classic with extensive, resource-efficient improvements to the user interface and experience.
+## Addon for World of Warcraft Classic with extensive, resource-efficient improvements to the user interface.
 
-## Features
+## Core Features
 
 1. **Action Bars**: Redesign and reposition action bars to enhance consistency and accessibility.
 2. **Progress Bars**: Conceal experience and reputation bars; hovering over the level reveals related experience information.
@@ -22,8 +22,11 @@
 16. **Graphics**: Disable in-game glow effects to improve visual clarity.
 17. **Sounds**: Mute specific sounds, such as mechastrider mount engines and bow strings being pulled, to reduce auditory distraction.
 
-## Sound Replacement
-To substitute the gun sounds with sounds resembling those of a silenced gun, transfer the "Sounds" folder into the specified "classic" directory.
+## Font Replacement
+To achieve a cleaner, more streamlined text appearance in-game, place the "Fonts" folder into your "_classic_era_" directory.
 
-## Compatibility
+## Sound Replacement
+To substitute the gun sounds with sounds resembling those of a silenced gun, transfer the "Sounds" folder into the specified "_classic_era_" directory.
+
+## Compatibility Disclaimer
 This addon provides active support for Questie addon elements across various instances. Compatibility with other addons has not been systematically evaluated.
