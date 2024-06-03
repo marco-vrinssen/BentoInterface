@@ -58,12 +58,10 @@ MerchantEvents:SetScript("OnEvent", AutoSellRepair)
 
 
 
+local DialogEvents = CreateFrame("Frame")
 
 DialogEvents:SetScript("OnEvent", function(self, event, ...)
     if event == "CONFIRM_LOOT_ROLL" then
-        local id, rollType = ...
-        ConfirmLootRoll(id, rollType)
-    elseif event == "CONFIRM_DISENCHANT_ROLL" then
         local id, rollType = ...
         ConfirmLootRoll(id, rollType)
     elseif event == "LOOT_BIND_CONFIRM" then
@@ -84,10 +82,7 @@ StaticPopupDialogs["DELETE_ITEM"].OnShow = function(self)
     self.editBox:SetText(DELETE_ITEM_CONFIRM_STRING)
 end
 
-
-local DialogEvents = CreateFrame("Frame")
 DialogEvents:RegisterEvent("CONFIRM_LOOT_ROLL")
-DialogEvents:RegisterEvent("CONFIRM_DISENCHANT_ROLL")
 DialogEvents:RegisterEvent("LOOT_BIND_CONFIRM")
 DialogEvents:RegisterEvent("EQUIP_BIND_CONFIRM")
 DialogEvents:RegisterEvent("MERCHANT_CONFIRM_TRADE_TIMER_REMOVAL")
