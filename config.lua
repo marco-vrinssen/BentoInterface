@@ -9,6 +9,7 @@ local function ConfigUpdate()
     SetCVar("ffxGlow", 0)
     SetCVar("ffxDeath", 0)
     SetCVar("ffxNether", 0)
+    SetCVar("cameraDistanceMaxZoomFactor", 2)
 end
 
 local ConfigEvents = CreateFrame("Frame")
