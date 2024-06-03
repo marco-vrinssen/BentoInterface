@@ -87,3 +87,11 @@ DialogEvents:RegisterEvent("LOOT_BIND_CONFIRM")
 DialogEvents:RegisterEvent("EQUIP_BIND_CONFIRM")
 DialogEvents:RegisterEvent("MERCHANT_CONFIRM_TRADE_TIMER_REMOVAL")
 DialogEvents:RegisterEvent("DELETE_ITEM_CONFIRM")
+
+
+
+
+
+
+
+
