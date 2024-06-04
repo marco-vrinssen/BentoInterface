@@ -23,10 +23,10 @@
 17. **Sounds**: Mute specific sounds, such as mechastrider mount engines and bow strings being pulled, to reduce auditory distraction.
 
 ## Font Replacement
-To achieve a cleaner, more streamlined text appearance in-game, place the "Fonts" folder into your "_classic_era_" directory.
+To achieve a cleaner, more streamlined text appearance in-game, copy the "Fonts" folder into the "_classic_era_" directory.
 
 ## Sound Replacement
-To substitute the gun sounds with sounds resembling those of a silenced gun, transfer the "Sounds" folder into the specified "_classic_era_" directory.
+To substitute the gun sounds with those resembling a silenced gun, copy the "Sounds" folder into the "_classic_era_" directory.
 
 ## Compatibility Disclaimer
 This addon provides active support for Questie addon elements across various instances. Compatibility with other addons has not been systematically evaluated.
