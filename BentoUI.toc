@@ -10,8 +10,10 @@ Modules/Bags.lua
 Modules/Castbar.lua
 Modules/Chat.lua
 Modules/ComboPoints.lua
-Modules/Configuration.lua
-Modules/Items.lua
+Modules/Config.lua
+Modules/Dialogs.lua
+Modules/Loot.lua
+Modules/Merchant.lua
 Modules/MicroMenu.lua
 Modules/MiniMap.lua
 Modules/NamePlates.lua
