@@ -1,4 +1,4 @@
-## Interface: 11600
+## Interface: 11500
 ## Title: Bento UI
 ## Notes: Extensive, resource-efficient improvements to the user interface.
 ## Version: 1.0
