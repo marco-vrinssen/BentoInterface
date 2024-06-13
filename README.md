@@ -26,7 +26,7 @@
 To achieve a cleaner, more streamlined text appearance in-game, copy the "Fonts" folder into the "_classic_era_" directory.
 
 ## Sound Replacement
-To substitute the gun sounds with those resembling a silenced gun, copy the "Sounds" folder into the "_classic_era_" directory.
+To substitute the gun and bow sounds with more subtle versions, copy the "Sounds" folder into the "_classic_era_" directory.
 
 ## Compatibility Disclaimer
-This addon provides active support for Questie addon elements across various instances. Compatibility with other addons has not been systematically evaluated.
+This addon provides active support for Questie addon elements across various instances. Compatibility with other addons has not been evaluated.
