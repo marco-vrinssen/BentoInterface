@@ -5,7 +5,7 @@ end
 local function UnitTooltipUpdate(GameTooltip)
     if GameTooltip:GetAnchorType() ~= "ANCHOR_CURSOR" then
         GameTooltip:ClearAllPoints()
-        GameTooltip:SetPoint("TOPLEFT", BentoUI.TargetPortraitBackdrop, "BOTTOMRIGHT", 0, -4)
+        GameTooltip:SetPoint("TOPLEFT", BentoUI.TargetPortraitBackdrop, "BOTTOMRIGHT", 0, 0)
 
         GameTooltipStatusBar:ClearAllPoints()
         GameTooltipStatusBar:SetPoint("TOP", GameTooltip, "BOTTOM", 0, 2)

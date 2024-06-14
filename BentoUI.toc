@@ -18,6 +18,7 @@ Modules/MicroMenu.lua
 Modules/MiniMap.lua
 Modules/NamePlates.lua
 Modules/PlayerFrame.lua
+Modules/Progressbars.lua
 Modules/TargetFrame.lua
 Modules/Tooltips.lua
 Modules/WorldMap.lua

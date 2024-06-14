@@ -1,13 +1,13 @@
 local function ActionBarUpdate()
     MainMenuBar:SetWidth(512)
     MainMenuBar:ClearAllPoints()
-    MainMenuBar:SetPoint("BOTTOM", UIParent, "BOTTOM", -2, 64)
+    MainMenuBar:SetPoint("BOTTOM", UIParent, "BOTTOM", -2, 88)
     MainMenuBar:SetMovable(true)
     MainMenuBar:SetUserPlaced(true)
 
     MultiBarBottomLeft:Show()
     MultiBarBottomLeft:ClearAllPoints()
-    MultiBarBottomLeft:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 110)
+    MultiBarBottomLeft:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 136)
     MultiBarBottomLeft:SetMovable(true)
     MultiBarBottomLeft:SetUserPlaced(true)
 
@@ -64,7 +64,7 @@ function ActionButtonUpdate(self)
         local ActionUsability = IsUsableAction(self.action)
         
         if not ActionUsability or ActionRange == false then
-            self.icon:SetVertexColor(0.5, 0.5, 0.5, 1)
+            self.icon:SetVertexColor(0.25, 0.25, 0.25, 1)
         else
             self.icon:SetVertexColor(1, 1, 1, 1)
         end
@@ -135,46 +135,6 @@ ClassBarEvents:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
 ClassBarEvents:RegisterEvent("UPDATE_SHAPESHIFT_USABLE")
 ClassBarEvents:RegisterEvent("UPDATE_SHAPESHIFT_COOLDOWN")
 ClassBarEvents:SetScript("OnEvent", ClassBarUpdate)
-
-
-
-
-local function ExperienceBarHide()
-    MainMenuExpBar:Hide()
-    MainMenuExpBar:SetAlpha(0)
-    MainMenuXPBarTexture0:Hide()
-    MainMenuXPBarTexture1:Hide()
-    MainMenuXPBarTexture2:Hide()
-    MainMenuXPBarTexture3:Hide()
-end
-
-MainMenuExpBar:HookScript("OnShow", ExperienceBarHide)
-
-local ExperienceBarEvents = CreateFrame("Frame")
-ExperienceBarEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
-ExperienceBarEvents:RegisterEvent("PLAYER_LEVEL_UP")
-ExperienceBarEvents:RegisterEvent("PLAYER_XP_UPDATE")
-ExperienceBarEvents:RegisterEvent("UPDATE_EXHAUSTION")
-ExperienceBarEvents:SetScript("OnEvent", ExperienceBarHide)
-
-
-
-
-local function ReputationBarHide()
-    ReputationWatchBar.StatusBar:Hide()
-    ReputationWatchBar.OverlayFrame:Hide()
-    ReputationWatchBar.StatusBar.WatchBarTexture0:Hide()
-    ReputationWatchBar.StatusBar.WatchBarTexture1:Hide()
-    ReputationWatchBar.StatusBar.WatchBarTexture2:Hide()
-    ReputationWatchBar.StatusBar.WatchBarTexture3:Hide()
-end
-
-ReputationWatchBar.StatusBar:HookScript("OnShow", ReputationBarHide)
-
-local ReputationBarEvents = CreateFrame("Frame")
-ReputationBarEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
-ReputationBarEvents:RegisterEvent("UPDATE_FACTION")
-ReputationBarEvents:SetScript("OnEvent", ReputationBarHide)
 
 
 
