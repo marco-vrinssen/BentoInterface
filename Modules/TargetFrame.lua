@@ -1,5 +1,5 @@
 local TargetFrameBackdrop = CreateFrame("Button", nil, TargetFrame, "SecureUnitButtonTemplate, BackdropTemplate")
-TargetFrameBackdrop:SetPoint("BOTTOM", UIParent, "BOTTOM", 190, 208)
+TargetFrameBackdrop:SetPoint("BOTTOM", UIParent, "BOTTOM", 190, 224)
 TargetFrameBackdrop:SetSize(124, 48)
 TargetFrameBackdrop:SetBackdrop({edgeFile = "Interface/Tooltips/UI-Tooltip-Border", edgeSize = 12})
 TargetFrameBackdrop:SetBackdropBorderColor(0.5, 0.5, 0.5, 1)

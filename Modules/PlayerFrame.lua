@@ -1,5 +1,5 @@
 local PlayerFrameBackdrop = CreateFrame("Button", nil, PlayerFrame, "SecureUnitButtonTemplate, BackdropTemplate")
-PlayerFrameBackdrop:SetPoint("BOTTOM", UIParent, "BOTTOM", -190, 208)
+PlayerFrameBackdrop:SetPoint("BOTTOM", UIParent, "BOTTOM", -190, 224)
 PlayerFrameBackdrop:SetSize(124, 48)
 PlayerFrameBackdrop:SetBackdrop({edgeFile = "Interface/Tooltips/UI-Tooltip-Border", edgeSize = 12})
 PlayerFrameBackdrop:SetBackdropBorderColor(0.5, 0.5, 0.5, 1)
