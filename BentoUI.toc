@@ -12,9 +12,8 @@ Modules/Chat.lua
 Modules/ComboPoints.lua
 Modules/Config.lua
 Modules/Dialogs.lua
-Modules/Loot.lua
-Modules/Merchant.lua
-Modules/MicroMenu.lua
+Modules/Items.lua
+Modules/Menu.lua
 Modules/MiniMap.lua
 Modules/NamePlates.lua
 Modules/PlayerFrame.lua
