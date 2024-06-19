@@ -53,6 +53,12 @@ local function PlayerFrameUpdate()
     PlayerFrameGroupIndicator:Hide()
     PlayerFrameGroupIndicator.Show = PlayerFrameGroupIndicator.Hide
 
+    local MultiGroupFrame = _G["MultiGroupFrame"]
+
+    if MultiGroupFrame then
+        MultiGroupFrame:Hide()
+    end
+
     PlayerPVPTimerText:ClearAllPoints()
     PlayerPVPTimerText:SetPoint("TOPRIGHT", PlayerPortraitBackdrop, "TOPLEFT", -4, 0)
     PlayerPVPTimerText:SetFont(STANDARD_TEXT_FONT, 10)
@@ -61,7 +67,7 @@ local function PlayerFrameUpdate()
     PlayerName:ClearAllPoints()
     PlayerName:SetPoint("TOP", PlayerFrameBackdrop, "TOP", 0, -6)
     PlayerName:SetFont(STANDARD_TEXT_FONT, 12)
-    PlayerName:SetTextColor(1, 1, 1, 0.5)
+    PlayerName:SetTextColor(1, 1, 1, 1)
 
     PlayerLevelText:ClearAllPoints()
     PlayerLevelText:SetPoint("TOP", PlayerPortraitBackdrop, "BOTTOM", 0, -4)
@@ -118,6 +124,10 @@ PlayerFrameEvents:RegisterEvent("PLAYER_LEVEL_UP")
 PlayerFrameEvents:RegisterEvent("PLAYER_XP_UPDATE")
 PlayerFrameEvents:RegisterEvent("UPDATE_EXHAUSTION")
 PlayerFrameEvents:SetScript("OnEvent", PlayerFrameUpdate)
+
+
+
+
 
 
 
