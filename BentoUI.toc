@@ -7,6 +7,7 @@
 Modules/Actionsbars.lua
 Modules/Auras.lua
 Modules/Bags.lua
+Modules/BattleMap.lua
 Modules/Castbar.lua
 Modules/Chat.lua
 Modules/ComboPoints.lua

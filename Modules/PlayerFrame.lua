@@ -51,12 +51,14 @@ local function PlayerFrameUpdate()
     PlayerMasterIcon:SetScale(0.75)
 
     PlayerFrameGroupIndicator:Hide()
-    PlayerFrameGroupIndicator.Show = PlayerFrameGroupIndicator.Hide
 
     local MultiGroupFrame = _G["MultiGroupFrame"]
 
     if MultiGroupFrame then
         MultiGroupFrame:Hide()
+        MultiGroupFrame:HookScript("OnShow", function(self)
+            self:Hide()
+        end)
     end
 
     PlayerPVPTimerText:ClearAllPoints()
