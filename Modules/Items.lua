@@ -23,7 +23,7 @@ local function AutoSellRepair()
         RepairCost = GetRepairAllCost()
         if RepairCost > 0 then
             RepairAllItems()
-            print("Items repaired for " .. GetCoinTextureString(RepairCost))
+            print("|cFFFFFF00Gear repaired for:|r " .. GetCoinTextureString(RepairCost))
         end
     end
 
@@ -41,7 +41,7 @@ local function AutoSellRepair()
     end
 
     if TotalSold > 0 then
-        print("Trash sold for " .. GetCoinTextureString(TotalSold))
+        print("|cFFFFFF00Grey items sold for:|r " .. GetCoinTextureString(TotalSold))
     end
 end
 
