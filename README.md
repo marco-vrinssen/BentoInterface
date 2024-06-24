@@ -2,7 +2,7 @@
 
 ## Addon for World of Warcraft Classic with extensive, resource-efficient improvements to the user interface.
 
-## Features
+## Feature Overview
 
 1. **Action Bars**: Redesign and reposition action bars to enhance consistency and accessibility.
 2. **Progress Bars**: Conceal experience and reputation bars; hovering over the level reveals related experience information.
