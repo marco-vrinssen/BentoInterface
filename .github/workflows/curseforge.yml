@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Updated to use Node.js 20
+        uses: actions/checkout@v3  # Ensuring latest version
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # Updated to use Node.js 20
+        uses: actions/setup-node@v3  # Ensuring latest version
         with:
           node-version: '20'
 
@@ -33,17 +33,20 @@ jobs:
         id: readme
         run: |
           README_CONTENT=$(cat README.md)
-          echo "::set-output name=content::$README_CONTENT"
+          echo "README_CONTENT<<EOF" >> $GITHUB_ENV
+          echo "$README_CONTENT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Upload to CurseForge
         env:
           CF_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
           CF_PROJECT_ID: ${{ secrets.CURSEFORGE_PROJECT_ID }}
+          README_CONTENT: ${{ env.README_CONTENT }}
         run: |
           curl -X POST "https://wow.curseforge.com/api/projects/$CF_PROJECT_ID/upload-file" \
             -H "x-api-token: $CF_API_KEY" \
             -F "file=@release/bento-interface-1.0.zip" \
-            -F "metadata={\"changelog\": \"New release\", \"displayName\": \"Bento Interface 1.0\", \"gameVersions\": [\"1.0\"], \"releaseType\": \"release\", \"changelogType\": \"markdown\", \"changelog\": \"${{ steps.readme.outputs.content }}\", \"description\": \"${{ steps.readme.outputs.content }}\"}"
+            -F "metadata={\"changelog\": \"New release\", \"displayName\": \"Bento Interface 1.0\", \"gameVersions\": [\"1.0\"], \"releaseType\": \"release\", \"changelogType\": \"markdown\", \"changelog\": \"$README_CONTENT\", \"description\": \"$README_CONTENT\"}"
 
       - name: Create GitHub Release
         id: create_release
@@ -53,6 +56,6 @@ jobs:
         with:
           tag_name: v1.0
           release_name: "Bento Interface 1.0"
-          body: "New Release of Bento Interface"
+          body: "New release of Bento Interface"
           draft: false
           prerelease: false
