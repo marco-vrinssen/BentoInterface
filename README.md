@@ -2,7 +2,7 @@
 
 ## Addon for World of Warcraft Classic with extensive, resource-efficient improvements to the user interface.
 
-## Feature Overview
+## Features
 
 1. **Action Bars**: Redesign and reposition action bars to enhance consistency and accessibility.
 2. **Progress Bars**: Conceal experience and reputation bars; hovering over the level reveals related experience information.
@@ -21,12 +21,6 @@
 15. **Minimap**: Redesign the minimap, clock, and zone buttons, along with addon buttons, for consistency and accessibility.
 16. **Graphics**: Disable in-game glow effects to improve visual clarity.
 17. **Sounds**: Mute specific sounds, such as mechastrider mount engines and bow strings being pulled, to reduce auditory distraction.
-
-## Font Replacement
-To achieve a cleaner, more streamlined text appearance in-game, copy the "Fonts" folder into the "_classic_era_" directory.
-
-## Sound Replacement
-To substitute the gun and bow sounds with more subtle versions, copy the "Sounds" folder into the "_classic_era_" directory.
 
 ## Compatibility Disclaimer
 This addon provides active support for Questie addon elements across various instances. Compatibility with other addons has not been evaluated.
