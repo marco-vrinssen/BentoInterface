@@ -29,6 +29,12 @@ jobs:
           mkdir -p release
           zip -r release/bento_interface.zip * -x '*.git*' 'node_modules/*' '.github/*'
 
+      - name: Read README.md
+        id: readme
+        run: |
+          README_CONTENT=$(<README.md)
+          echo "::set-output name=content::$README_CONTENT"
+
       - name: Upload to CurseForge
         env:
           CF_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
@@ -36,4 +42,4 @@ jobs:
           curl -X POST "https://wow.curseforge.com/api/projects/1044952/upload-file" \
             -H "x-api-token: $CF_API_KEY" \
             -F "file=@release/bento_interface.zip" \
-            -F "metadata={\"changelog\": \"New release\", \"displayName\": \"Bento Interface 1.0\"}"
+            -F "metadata={\"changelog\": \"New release\", \"displayName\": \"Bento Interface 1.0\", \"description\": \"${{ steps.readme.outputs.content }}\"}"
