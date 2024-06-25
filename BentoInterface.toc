@@ -4,20 +4,20 @@
 ## Version: 1.0
 ## Author: MIYANKO
 
-Modules/Actionsbars.lua
-Modules/Auras.lua
-Modules/Bags.lua
-Modules/Castbar.lua
-Modules/Chat.lua
-Modules/ComboPoints.lua
-Modules/Config.lua
-Modules/Dialogs.lua
-Modules/Items.lua
-Modules/Menu.lua
-Modules/MiniMap.lua
-Modules/NamePlates.lua
-Modules/PlayerFrame.lua
-Modules/Progressbars.lua
-Modules/TargetFrame.lua
-Modules/Tooltips.lua
-Modules/WorldMap.lua
+Actionsbars.lua
+Auras.lua
+Bags.lua
+Castbar.lua
+Chat.lua
+ComboPoints.lua
+Config.lua
+Dialogs.lua
+Items.lua
+Menu.lua
+MiniMap.lua
+NamePlates.lua
+PlayerFrame.lua
+Progressbars.lua
+TargetFrame.lua
+Tooltips.lua
+WorldMap.lua
