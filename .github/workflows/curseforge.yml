@@ -1,20 +1,15 @@
-name: CurseForge Release
-
-on:
-  push:
-    branches:
-      - main  # Adjust to your main branch if different
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Ensuring latest version
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Optional: Ensures complete checkout to avoid cache issues
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # Ensuring latest version
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
 
