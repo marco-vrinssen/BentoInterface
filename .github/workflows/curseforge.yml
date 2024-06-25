@@ -1,15 +1,20 @@
+name: CurseForge Release
+
+on:
+  push:
+    branches:
+      - main  # Adjust to your main branch if different
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Optional: Ensures complete checkout to avoid cache issues
+        uses: actions/checkout@v3  # Ensuring latest version with Node.js 20
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3  # Ensuring latest version with Node.js 20
         with:
           node-version: '20'
 
@@ -27,9 +32,8 @@ jobs:
       - name: Read README.md
         id: readme
         run: |
-          README_CONTENT=$(cat README.md)
           echo "README_CONTENT<<EOF" >> $GITHUB_ENV
-          echo "$README_CONTENT" >> $GITHUB_ENV
+          cat README.md >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Upload to CurseForge
