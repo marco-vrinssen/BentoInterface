@@ -64,7 +64,7 @@ local function PlayerFrameUpdate()
     PlayerPVPTimerText:SetTextColor(1, 1, 1, 1)
 
     PlayerName:ClearAllPoints()
-    PlayerName:SetPoint("TOP", PlayerFrameBackdrop, "TOP", 0, -6)
+    PlayerName:SetPoint("TOP", PlayerFrameBackdrop, "TOP", 0, -5)
     PlayerName:SetFont(STANDARD_TEXT_FONT, 12)
     PlayerName:SetTextColor(1, 1, 1, 1)
 

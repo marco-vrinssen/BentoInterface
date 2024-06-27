@@ -146,9 +146,8 @@ local function MinimapBFUpdate()
     MiniMapBattlefieldFrame:SetPoint("LEFT", MinimapTimeBackdrop, "RIGHT", 8, 0)
 
     MiniMapBattlefieldIcon:ClearAllPoints()
-    MiniMapBattlefieldIcon:SetSize(17,17)
+    MiniMapBattlefieldIcon:SetSize(16,16)
     MiniMapBattlefieldIcon:SetPoint("CENTER", MiniMapBattlefieldFrame, "CENTER", 0, 0)
-
 end
 
 local MinimapBFEvents = CreateFrame("Frame")
