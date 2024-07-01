@@ -54,7 +54,7 @@ local function TargetFrameUpdate()
     TargetFrameTextureFrameName:SetFont(STANDARD_TEXT_FONT, 12)
 
     if UnitExists("target") then
-        if UnitIsEnemy("player", "target") then
+        if (UnitIsEnemy("player", "target") and UnitIsPlayer("target")) or (UnitReaction("player", "target") and UnitReaction("player", "target") <= 4) then
             TargetFrameTextureFrameName:SetTextColor(1, 0.25, 0)
         else
             TargetFrameTextureFrameName:SetTextColor(1, 1, 1)
@@ -354,78 +354,3 @@ end
 local TargetConfigEvents = CreateFrame("Frame")
 TargetConfigEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
 TargetConfigEvents:SetScript("OnEvent", TargetConfigUpdate)
-
-
-
-
-
-
-
-
--- Backup
-
--- local TargetDebuffTracker = CreateFrame("Frame", nil, UIParent)
--- TargetDebuffTracker:SetSize(32, 32)
--- TargetDebuffTracker:SetPoint("BOTTOMLEFT", TargetFrameBackdrop, "TOPLEFT", 0, 160)
-
--- local function TargetDebuffTrackerIcon(DebuffIndex, TargetDebuff)
---     local DebuffIcon = TargetDebuffTracker["TargetDebuff" .. DebuffIndex]
-
---     if not DebuffIcon then
---         DebuffIcon = CreateFrame("Frame", nil, TargetDebuffTracker)
---         DebuffIcon:SetSize(32, 32)
---         DebuffIcon.Texture = DebuffIcon:CreateTexture(nil, "BACKGROUND")
---         DebuffIcon.Texture:SetAllPoints(DebuffIcon)
-
---         DebuffIcon.Cooldown = CreateFrame("Cooldown", nil, DebuffIcon, "CooldownFrameTemplate")
---         DebuffIcon.Cooldown:SetAllPoints(DebuffIcon)
---         DebuffIcon.Cooldown:SetDrawSwipe(false)
-
---         DebuffIcon.StackText = DebuffIcon:CreateFontString(nil, "OVERLAY", "GameFontNormal")
---         DebuffIcon.StackText:SetPoint("BOTTOM", DebuffIcon, "TOP", 0, 4)
---         DebuffIcon.StackText:SetTextColor(1, 1, 1)
---         DebuffIcon.StackText:SetFont("GameFontNormal", 12, "OUTLINE")
-
---         TargetDebuffTracker["TargetDebuff" .. DebuffIndex] = DebuffIcon
---     end
-
---     DebuffIcon.Texture:SetTexture(TargetDebuff.DebuffIcon)
---     DebuffIcon:SetPoint("LEFT", TargetDebuffTracker, "LEFT", (DebuffIndex - 1) * 36, 0)
---     DebuffIcon.Cooldown:SetCooldown(TargetDebuff.DebuffExpiration - TargetDebuff.DebuffDuration, TargetDebuff.DebuffDuration)
-
---     if TargetDebuff.DebuffCount and TargetDebuff.DebuffCount > 0 then
---         DebuffIcon.StackText:SetText(TargetDebuff.DebuffCount)
---     else
---         DebuffIcon.StackText:SetText("")
---     end
-    
---     DebuffIcon:Show()
--- end
-
--- local function TargetDebuffTrackerUpdate()
---     local MaxDebuffs = 32
---     local DebuffNumber = 0
-
---     for i = 1, MaxDebuffs do
---         local DebuffName, DebuffIcon, DebuffCount, _, DebuffDuration, DebuffExpiration, DebuffCaster = UnitDebuff("target", i)
---         if DebuffName and DebuffCaster == "player" then
---             TargetDebuffTrackerIcon(DebuffNumber + 1, {DebuffIcon = DebuffIcon, DebuffCount = DebuffCount, DebuffDuration = DebuffDuration, DebuffExpiration = DebuffExpiration})
---             DebuffNumber = DebuffNumber + 1
---         end
---     end
-
---     for i = DebuffNumber + 1, MaxDebuffs do
---         local DebuffIcon = TargetDebuffTracker["TargetDebuff" .. i]
---         if DebuffIcon then
---             DebuffIcon:Hide()
---         end
---     end
--- end
-
--- hooksecurefunc("TargetFrame_Update", TargetDebuffTrackerUpdate)
--- hooksecurefunc("TargetFrame_UpdateAuras", TargetDebuffTrackerUpdate)
-
--- local TargetDebuffTrackerEvents = CreateFrame("Frame")
--- TargetDebuffTrackerEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
--- TargetDebuffTrackerEvents:RegisterEvent("PLAYER_TARGET_CHANGED")
--- TargetDebuffTrackerEvents:SetScript("OnEvent", TargetDebuffTrackerUpdate)
