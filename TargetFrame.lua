@@ -54,10 +54,16 @@ local function TargetFrameUpdate()
     TargetFrameTextureFrameName:SetFont(STANDARD_TEXT_FONT, 12)
 
     if UnitExists("target") then
-        if (UnitIsEnemy("player", "target") and UnitIsPlayer("target")) or (UnitReaction("player", "target") and UnitReaction("player", "target") <= 4) then
+        if UnitIsEnemy("player", "target") and UnitIsPlayer("target") then
             TargetFrameTextureFrameName:SetTextColor(1, 0.25, 0)
-        else
+        elseif UnitIsFriend("player", "target") and UnitIsPlayer("target") then
             TargetFrameTextureFrameName:SetTextColor(1, 1, 1)
+        elseif not UnitIsPlayer("target") then
+            if UnitIsEnemy("player", "target") then
+                TargetFrameTextureFrameName:SetTextColor(1, 0.25, 0)
+            elseif UnitCanAttack("player", "target") then
+                TargetFrameTextureFrameName:SetTextColor(1, 1, 0)
+            end
         end
     end
 
