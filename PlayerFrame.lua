@@ -50,14 +50,6 @@ local function PlayerFrameUpdate()
     PlayerMasterIcon:SetPoint("BOTTOM", PlayerLeaderIcon, "TOP", 0, 0)
     PlayerMasterIcon:SetScale(0.75)
 
-    PlayerFrameGroupIndicator:Hide()
-
-    local MultiGroupFrame = _G["MultiGroupFrame"]
-    if MultiGroupFrame then
-        MultiGroupFrame:Hide()
-        MultiGroupFrame:SetScript("OnShow", MultiGroupFrame.Hide)
-    end
-
     PlayerPVPTimerText:ClearAllPoints()
     PlayerPVPTimerText:SetPoint("TOPRIGHT", PlayerPortraitBackdrop, "TOPLEFT", -4, 0)
     PlayerPVPTimerText:SetFont(STANDARD_TEXT_FONT, 10)
@@ -127,6 +119,30 @@ PlayerFrameEvents:SetScript("OnEvent", PlayerFrameUpdate)
 
 
 
+local function HideGroupElements()
+    if PlayerFrameGroupIndicator then
+        PlayerFrameGroupIndicator:Hide()
+        PlayerFrameGroupIndicator:UnregisterAllEvents()
+    end
+
+    for i = 1, 4 do
+        local MultiGroupElements = _G["MultiGroupFrame"..i]
+        if MultiGroupElements then
+            MultiGroupElements:Hide()
+            MultiGroupElements:UnregisterAllEvents()
+        end
+    end
+end
+
+local GroupEvents = CreateFrame("Frame")
+GroupEvents:RegisterEvent("PLAYER_LOGIN")
+GroupEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+GroupEvents:RegisterEvent("GROUP_ROSTER_UPDATE")
+GroupEvents:RegisterEvent("RAID_ROSTER_UPDATE")
+GroupEvents:RegisterEvent("INSTANCE_GROUP_SIZE_CHANGED")
+GroupEvents:RegisterEvent("PLAYER_ENTERING_BATTLEGROUND")
+GroupEvents:RegisterEvent("GROUP_JOINED")
+GroupEvents:SetScript("OnEvent", HideGroupElements)
 
 
 
