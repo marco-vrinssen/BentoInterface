@@ -173,7 +173,12 @@ local function PlayerLevelTooltip()
     local RestedExperience = GetXPExhaustion() or 0
 
     local ExperienceText = string.format(
-        "Progress: |cFFFFFFFF%d%%|r\nRested: |cFFFFFFFF%d%%|r\nCurrent: |cFFFFFFFF%d|r\nMissing: |cFFFFFFFF%d|r\nTotal: |cFFFFFFFF%d|r",
+        "|cFFFFFFFFExperience|r\n\n" ..
+        "|cFFFFCC00Progress:|r |cFFFFFFFF%d%%|r\n" ..
+        "|cFFFFCC00Rested:|r |cFFFFFFFF%d%%|r\n" ..
+        "|cFFFFCC00Current:|r |cFFFFFFFF%d|r\n" ..
+        "|cFFFFCC00Missing:|r |cFFFFFFFF%d|r\n" ..
+        "|cFFFFCC00Total:|r |cFFFFFFFF%d|r",
         math.floor((CurrentExperience / MaxExperience) * 100),
         math.floor((RestedExperience / MaxExperience) * 100),
         CurrentExperience,
