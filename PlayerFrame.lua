@@ -10,6 +10,9 @@ PlayerFrameBackdrop:RegisterForClicks("AnyUp")
 PlayerFrameBackdrop:SetAttribute("type1", "target")
 PlayerFrameBackdrop:SetAttribute("type2", "togglemenu")
 
+
+
+
 local PlayerPortraitBackdrop = CreateFrame("Button", nil, PlayerFrame, "SecureUnitButtonTemplate, BackdropTemplate")
 PlayerPortraitBackdrop:SetPoint("RIGHT", PlayerFrameBackdrop, "LEFT", 0, 0)
 PlayerPortraitBackdrop:SetSize(48 ,48)
@@ -21,6 +24,9 @@ PlayerPortraitBackdrop:SetAttribute("unit", "player")
 PlayerPortraitBackdrop:RegisterForClicks("AnyUp")
 PlayerPortraitBackdrop:SetAttribute("type1", "target")
 PlayerPortraitBackdrop:SetAttribute("type2", "togglemenu")
+
+
+
 
 local function PlayerFrameUpdate()
     PlayerFrame:ClearAllPoints()
@@ -43,33 +49,10 @@ local function PlayerFrameUpdate()
     PlayerPVPIcon:SetAlpha(0)
     PlayerPVPTimerText:Hide()
 
-    PlayerLeaderIcon:ClearAllPoints()
-    PlayerLeaderIcon:SetPoint("BOTTOM", PlayerPortraitBackdrop, "TOP", 0, 0)
-
-    PlayerMasterIcon:ClearAllPoints()
-    PlayerMasterIcon:SetPoint("BOTTOM", PlayerLeaderIcon, "TOP", 0, 0)
-    PlayerMasterIcon:SetScale(0.75)
-
-    PlayerPVPTimerText:ClearAllPoints()
-    PlayerPVPTimerText:SetPoint("TOPRIGHT", PlayerPortraitBackdrop, "TOPLEFT", -4, 0)
-    PlayerPVPTimerText:SetFont(STANDARD_TEXT_FONT, 10)
-    PlayerPVPTimerText:SetTextColor(1, 1, 1, 1)
-
     PlayerName:ClearAllPoints()
     PlayerName:SetPoint("TOP", PlayerFrameBackdrop, "TOP", 0, -5)
     PlayerName:SetFont(STANDARD_TEXT_FONT, 12)
     PlayerName:SetTextColor(1, 1, 1, 1)
-
-    PlayerLevelText:ClearAllPoints()
-    PlayerLevelText:SetPoint("TOP", PlayerPortraitBackdrop, "BOTTOM", 0, -4)
-    PlayerLevelText:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
-    PlayerLevelText:SetTextColor(1, 1, 1, 1)
-
-    if UnitLevel("player") == 60 then
-        PlayerLevelText:Hide()
-    else
-        PlayerLevelText:Show()
-    end
 
     PlayerFrameHealthBar:ClearAllPoints()
     PlayerFrameHealthBar:SetSize(PlayerFrameBackground:GetWidth(), 16)
@@ -94,13 +77,6 @@ local function PlayerFrameUpdate()
     PlayerFrameManaBarTextLeft:SetFont(STANDARD_TEXT_FONT, 8, "OUTLINE")
     PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", -4, 0)
     PlayerFrameManaBarTextRight:SetFont(STANDARD_TEXT_FONT, 8, "OUTLINE")
-
-    PlayerPortrait:ClearAllPoints()
-    PlayerPortrait:SetPoint("CENTER", PlayerPortraitBackdrop, "CENTER", 0, 0)
-    PlayerPortrait:SetTexCoord(0.15, 0.85, 0.15, 0.85)
-    PlayerPortrait:SetSize(PlayerPortraitBackdrop:GetHeight()-6, PlayerPortraitBackdrop:GetHeight()-6)
-    
-    PlayerFrame:UnregisterEvent( "UNIT_COMBAT" )
 end
 
 hooksecurefunc("PlayerFrame_Update", PlayerFrameUpdate)
@@ -111,38 +87,83 @@ PlayerFrameEvents:RegisterEvent("PLAYER_REGEN_DISABLED")
 PlayerFrameEvents:RegisterEvent("PLAYER_REGEN_ENABLED")
 PlayerFrameEvents:RegisterEvent("UNIT_POWER_UPDATE")
 PlayerFrameEvents:RegisterEvent("UNIT_DISPLAYPOWER")
-PlayerFrameEvents:RegisterEvent("PLAYER_LEVEL_UP")
-PlayerFrameEvents:RegisterEvent("PLAYER_XP_UPDATE")
 PlayerFrameEvents:RegisterEvent("UPDATE_EXHAUSTION")
 PlayerFrameEvents:SetScript("OnEvent", PlayerFrameUpdate)
 
 
 
 
-local function HideGroupElements()
-    if PlayerFrameGroupIndicator then
-        PlayerFrameGroupIndicator:Hide()
-        PlayerFrameGroupIndicator:UnregisterAllEvents()
-    end
+local function PlayerPortraitUpdate()
+    PlayerPortrait:ClearAllPoints()
+    PlayerPortrait:SetPoint("CENTER", PlayerPortraitBackdrop, "CENTER", 0, 0)
+    PlayerPortrait:SetTexCoord(0.15, 0.85, 0.15, 0.85)
+    PlayerPortrait:SetSize(PlayerPortraitBackdrop:GetHeight()-6, PlayerPortraitBackdrop:GetHeight()-6)
+    
+    PlayerFrame:UnregisterEvent("UNIT_COMBAT")
 
-    for i = 1, 4 do
-        local MultiGroupElements = _G["MultiGroupFrame"..i]
-        if MultiGroupElements then
-            MultiGroupElements:Hide()
-            MultiGroupElements:UnregisterAllEvents()
-        end
+    PlayerLeaderIcon:ClearAllPoints()
+    PlayerLeaderIcon:SetPoint("BOTTOM", PlayerPortraitBackdrop, "TOP", 0, 0)
+
+    PlayerMasterIcon:ClearAllPoints()
+    PlayerMasterIcon:SetPoint("BOTTOM", PlayerLeaderIcon, "TOP", 0, 0)
+    PlayerMasterIcon:SetScale(0.75)
+
+    PlayerPVPTimerText:ClearAllPoints()
+    PlayerPVPTimerText:SetPoint("TOPRIGHT", PlayerPortraitBackdrop, "TOPLEFT", -4, 0)
+    PlayerPVPTimerText:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+    PlayerPVPTimerText:SetTextColor(1, 1, 1, 1)
+end
+
+local PlayerPortraitEvents = CreateFrame("Frame")
+PlayerPortraitEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+PlayerPortraitEvents:SetScript("OnEvent", PlayerPortraitUpdate)
+
+
+
+
+local function PlayerGroupUpdate()
+    PlayerFrameGroupIndicator:SetAlpha(0)
+    PlayerFrameGroupIndicator:Hide()
+
+    local MultiGroupFrame = _G["MultiGroupFrame"]
+    if MultiGroupFrame then
+        MultiGroupFrame:SetTexture(nil)
+        MultiGroupFrame:SetAlpha(0)
+        MultiGroupFrame:Hide()
     end
 end
 
-local GroupEvents = CreateFrame("Frame")
-GroupEvents:RegisterEvent("PLAYER_LOGIN")
-GroupEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
-GroupEvents:RegisterEvent("GROUP_ROSTER_UPDATE")
-GroupEvents:RegisterEvent("RAID_ROSTER_UPDATE")
-GroupEvents:RegisterEvent("INSTANCE_GROUP_SIZE_CHANGED")
-GroupEvents:RegisterEvent("PLAYER_ENTERING_BATTLEGROUND")
-GroupEvents:RegisterEvent("GROUP_JOINED")
-GroupEvents:SetScript("OnEvent", HideGroupElements)
+if _G["MultiGroupFrame"] then
+    MultiGroupFrame:HookScript("OnShow", PlayerGroupUpdate)
+end
+
+PlayerFrameGroupIndicator:HookScript("OnShow", PlayerGroupUpdate)
+
+local PlayerGroupEvents = CreateFrame("Frame")
+PlayerGroupEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+PlayerGroupEvents:SetScript("OnEvent", PlayerGroupUpdate)
+
+
+
+
+local function PlayerLevelUpdate()
+    PlayerLevelText:ClearAllPoints()
+    PlayerLevelText:SetPoint("TOP", PlayerPortraitBackdrop, "BOTTOM", 0, -4)
+    PlayerLevelText:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+    PlayerLevelText:SetTextColor(1, 1, 1, 1)
+
+    if UnitLevel("player") == 60 then
+        PlayerLevelText:Hide()
+    else
+        PlayerLevelText:Show()
+    end
+end
+
+local PlayerLevelEvents = CreateFrame("Frame")
+PlayerLevelEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+PlayerLevelEvents:RegisterEvent("PLAYER_LEVEL_UP")
+PlayerLevelEvents:RegisterEvent("PLAYER_XP_UPDATE")
+PlayerLevelEvents:SetScript("OnEvent", PlayerLevelUpdate)
 
 
 
@@ -160,7 +181,7 @@ local function PlayerLevelTooltip()
         MaxExperience
     )
 
-    GameTooltip:SetOwner(PlayerPortraitBackdrop, "ANCHOR_BOTTOMLEFT")
+    GameTooltip:SetOwner(PlayerLevelText, "ANCHOR_BOTTOMLEFT")
     GameTooltip:SetText(ExperienceText, nil, nil, nil, nil, true)
     GameTooltip:Show()
 end

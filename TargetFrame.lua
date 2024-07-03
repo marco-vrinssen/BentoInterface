@@ -10,6 +10,9 @@ TargetFrameBackdrop:RegisterForClicks("AnyUp")
 TargetFrameBackdrop:SetAttribute("type1", "target")
 TargetFrameBackdrop:SetAttribute("type2", "togglemenu")
 
+
+
+
 local TargetPortraitBackdrop = CreateFrame("Button", nil, TargetFrame, "SecureUnitButtonTemplate, BackdropTemplate")
 TargetPortraitBackdrop:SetPoint("LEFT", TargetFrameBackdrop, "RIGHT", 0, 0)
 TargetPortraitBackdrop:SetSize(48 ,48)
@@ -23,6 +26,9 @@ TargetPortraitBackdrop:SetAttribute("type1", "target")
 TargetPortraitBackdrop:SetAttribute("type2", "togglemenu")
 
 BentoUI.TargetPortraitBackdrop = TargetPortraitBackdrop
+
+
+
 
 local function TargetFrameUpdate()
     TargetFrame:ClearAllPoints()
@@ -40,13 +46,12 @@ local function TargetFrameUpdate()
 
     TargetFrameNameBackground:Hide()
     TargetFrameTextureFrameTexture:Hide()
+    
     TargetFrameTextureFramePVPIcon:SetAlpha(0)
-
-    TargetFrameTextureFrameLeaderIcon:ClearAllPoints()
-    TargetFrameTextureFrameLeaderIcon:SetPoint("BOTTOM", TargetPortraitBackdrop, "TOP", 0, 0)
 
     TargetFrameTextureFrameRaidTargetIcon:SetPoint("TOP", TargetPortraitBackdrop, "TOP", 0, -4)
     TargetFrameTextureFrameRaidTargetIcon:SetSize(16, 16)
+
     TargetFrameTextureFrameDeadText:Hide()
 
     TargetFrameTextureFrameName:ClearAllPoints()
@@ -76,18 +81,6 @@ local function TargetFrameUpdate()
     TargetFrameManaBar:SetSize(TargetFrameBackground:GetWidth(), 8)
     TargetFrameManaBar:SetPoint("BOTTOM", TargetFrameBackdrop, "BOTTOM", 0, 4)
     TargetFrameManaBar:SetStatusBarTexture("Interface/RaidFrame/Raid-Bar-HP-Fill.blp")
-
-    TargetFramePortrait:ClearAllPoints()
-    TargetFramePortrait:SetPoint("CENTER", TargetPortraitBackdrop, "CENTER", 0, 0)
-    TargetFramePortrait:SetSize(TargetPortraitBackdrop:GetHeight() - 6, TargetPortraitBackdrop:GetHeight() - 6)
-
-    TargetFrameTextureFrameLevelText:ClearAllPoints()
-    TargetFrameTextureFrameLevelText:SetPoint("TOP", TargetPortraitBackdrop, "BOTTOM", 0, -4)
-    TargetFrameTextureFrameLevelText:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
-
-    TargetFrameTextureFrameHighLevelTexture:ClearAllPoints()
-    TargetFrameTextureFrameHighLevelTexture:SetPoint("TOP", TargetPortraitBackdrop, "BOTTOM", 0, -6)
-    TargetFrameTextureFrameHighLevelTexture:SetTexture("Interface/TargetingFrame/UI-RaidTargetingIcon_8")
 end
 
 hooksecurefunc("TargetFrame_Update", TargetFrameUpdate)
@@ -96,31 +89,6 @@ local TargetFrameEvents = CreateFrame("Frame")
 TargetFrameEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
 TargetFrameEvents:RegisterEvent("PLAYER_TARGET_CHANGED")
 TargetFrameEvents:SetScript("OnEvent", TargetFrameUpdate)
-
-
-
-
-local function TargetPortraitUpdate(TargetPortrait)
-    if TargetPortrait.unit == "target" and TargetPortrait.portrait then
-        if UnitIsPlayer(TargetPortrait.unit) then
-            local PortraitTexture = CLASS_ICON_TCOORDS[select(2, UnitClass(TargetPortrait.unit))]
-            if PortraitTexture then
-                TargetPortrait.portrait:SetTexture("Interface/GLUES/CHARACTERCREATE/UI-CHARACTERCREATE-CLASSES")
-                local Left, Right, Top, Bottom = unpack(PortraitTexture)
-                local LeftUpdate = Left + (Right - Left) * 0.15
-                local RightUpdate = Right - (Right - Left) * 0.15
-                local TopUpdate = Top + (Bottom - Top) * 0.15
-                local BottomUpdate = Bottom - (Bottom - Top) * 0.15
-                TargetPortrait.portrait:SetTexCoord(LeftUpdate, RightUpdate, TopUpdate, BottomUpdate)
-                TargetPortrait.portrait:SetDrawLayer("BACKGROUND", -1)
-            end
-        else
-            TargetPortrait.portrait:SetTexCoord(0.15, 0.85, 0.15, 0.85)
-        end
-    end
-end
-
-hooksecurefunc("UnitFramePortrait_Update", TargetPortraitUpdate)
 
 
 
@@ -147,6 +115,83 @@ TargetHealthEvents:RegisterEvent("UNIT_HEALTH")
 TargetHealthEvents:RegisterEvent("UNIT_HEALTH_FREQUENT")
 TargetHealthEvents:RegisterEvent("UNIT_MAXHEALTH")
 TargetHealthEvents:SetScript("OnEvent", TargetHealthUpdate)
+
+
+
+
+local function TargetPortraitUpdate()
+    TargetFramePortrait:ClearAllPoints()
+    TargetFramePortrait:SetPoint("CENTER", TargetPortraitBackdrop, "CENTER", 0, 0)
+    TargetFramePortrait:SetSize(TargetPortraitBackdrop:GetHeight() - 6, TargetPortraitBackdrop:GetHeight() - 6)
+end
+
+local TargetPortraitEvents = CreateFrame("Frame")
+TargetPortraitEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+TargetPortraitEvents:RegisterEvent("PLAYER_TARGET_CHANGED")
+TargetPortraitEvents:SetScript("OnEvent", TargetPortraitUpdate)
+
+hooksecurefunc("TargetFrame_Update", TargetPortraitUpdate)
+hooksecurefunc("UnitFramePortrait_Update", TargetPortraitUpdate)
+
+
+
+
+local function PortraitTextureUpdate(TargetPortrait)
+    if TargetPortrait.unit == "target" and TargetPortrait.portrait then
+        if UnitIsPlayer(TargetPortrait.unit) then
+            local PortraitTexture = CLASS_ICON_TCOORDS[select(2, UnitClass(TargetPortrait.unit))]
+            if PortraitTexture then
+                TargetPortrait.portrait:SetTexture("Interface/GLUES/CHARACTERCREATE/UI-CHARACTERCREATE-CLASSES")
+                local Left, Right, Top, Bottom = unpack(PortraitTexture)
+                local LeftUpdate = Left + (Right - Left) * 0.15
+                local RightUpdate = Right - (Right - Left) * 0.15
+                local TopUpdate = Top + (Bottom - Top) * 0.15
+                local BottomUpdate = Bottom - (Bottom - Top) * 0.15
+                TargetPortrait.portrait:SetTexCoord(LeftUpdate, RightUpdate, TopUpdate, BottomUpdate)
+                TargetPortrait.portrait:SetDrawLayer("BACKGROUND", -1)
+            end
+        else
+            TargetPortrait.portrait:SetTexCoord(0.15, 0.85, 0.15, 0.85)
+        end
+    end
+end
+
+hooksecurefunc("UnitFramePortrait_Update", PortraitTextureUpdate)
+
+
+
+
+local function TargetGroupUpdate()
+    TargetFrameTextureFrameLeaderIcon:ClearAllPoints()
+    TargetFrameTextureFrameLeaderIcon:SetPoint("BOTTOM", TargetPortraitBackdrop, "TOP", 0, 0)
+end
+
+local TargetGroupEvents = CreateFrame("Frame")
+TargetGroupEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+TargetGroupEvents:RegisterEvent("PLAYER_TARGET_CHANGED")
+TargetGroupEvents:SetScript("OnEvent", TargetGroupUpdate)
+
+hooksecurefunc("TargetFrame_Update", TargetGroupUpdate)
+
+
+
+
+local function TragetLevelUpdate()
+    TargetFrameTextureFrameLevelText:ClearAllPoints()
+    TargetFrameTextureFrameLevelText:SetPoint("TOP", TargetPortraitBackdrop, "BOTTOM", 0, -4)
+    TargetFrameTextureFrameLevelText:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+
+    TargetFrameTextureFrameHighLevelTexture:ClearAllPoints()
+    TargetFrameTextureFrameHighLevelTexture:SetPoint("TOP", TargetPortraitBackdrop, "BOTTOM", 0, -6)
+    TargetFrameTextureFrameHighLevelTexture:SetTexture("Interface/TargetingFrame/UI-RaidTargetingIcon_8")
+end
+
+local TargetLevelEvents = CreateFrame("Frame")
+TargetLevelEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
+TargetLevelEvents:RegisterEvent("PLAYER_TARGET_CHANGED")
+TargetLevelEvents:SetScript("OnEvent", TragetLevelUpdate)
+
+hooksecurefunc("TargetFrame_Update", TragetLevelUpdate)
 
 
 
