@@ -84,7 +84,7 @@ local function PetBarUpdate()
         PetButton:ClearAllPoints()
 
         if not PreviousPetButton then
-            PetButton:SetPoint("BOTTOMLEFT", MultiBarBottomLeft, "TOPLEFT", 0, 4)
+            PetButton:SetPoint("BOTTOMLEFT", MultiBarBottomLeft, "TOPLEFT", 0, 8)
         else
             PetButton:SetPoint("LEFT", PreviousPetButton, "RIGHT", 4, 0)
         end
@@ -115,7 +115,7 @@ local function ClassBarUpdate()
         ClassButton:ClearAllPoints()
 
         if not PreviousClassButton then
-            ClassButton:SetPoint("BOTTOMLEFT", MultiBarBottomLeft, "TOPLEFT", 0, 4)
+            ClassButton:SetPoint("BOTTOMLEFT", MultiBarBottomLeft, "TOPLEFT", 0, 8)
         else
             ClassButton:SetPoint("LEFT", PreviousClassButton, "RIGHT", 4, 0)
         end
