@@ -69,7 +69,7 @@ local function TargetFrameUpdate()
             if UnitIsEnemy("player", "target") and UnitCanAttack("player", "target") then
                 TargetFrameTextureFrameName:SetTextColor(1, 0.25, 0)
             elseif UnitReaction("player", "target") == 4 and UnitCanAttack("player", "target") then
-                TargetFrameTextureFrameName:SetTextColor(1, 1, 0)
+                TargetFrameTextureFrameName:SetTextColor(1, 0.8, 0)
             elseif UnitReaction("player", "target") >= 4 and not UnitCanAttack("player", "target") then
                 TargetFrameTextureFrameName:SetTextColor(1, 1, 1)
             end
@@ -184,6 +184,10 @@ local function TragetLevelUpdate()
     TargetFrameTextureFrameLevelText:ClearAllPoints()
     TargetFrameTextureFrameLevelText:SetPoint("TOP", TargetPortraitBackdrop, "BOTTOM", 0, -4)
     TargetFrameTextureFrameLevelText:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+
+    if not UnitCanAttack("player", "target") or not UnitCanAttack("target", "player") then
+        TargetFrameTextureFrameLevelText:SetTextColor(1, 1, 1)
+    end
 
     TargetFrameTextureFrameHighLevelTexture:ClearAllPoints()
     TargetFrameTextureFrameHighLevelTexture:SetPoint("TOP", TargetPortraitBackdrop, "BOTTOM", 0, -6)
@@ -333,23 +337,23 @@ local function TargetClassificationUpdate()
     local TargetClassification = UnitClassification("target")
     if TargetClassification == "worldboss" then
         TargetClassificationText:SetText("Boss")
-        TargetClassificationText:SetTextColor(1, 0.5, 0, 1)
-        TargetFrameBackdrop:SetBackdropBorderColor(1, 0.5, 0, 1)
-        TargetPortraitBackdrop:SetBackdropBorderColor(1, 0.5, 0, 1)
+        TargetClassificationText:SetTextColor(1, 0.25, 0)
+        TargetFrameBackdrop:SetBackdropBorderColor(1, 0.25, 0)
+        TargetPortraitBackdrop:SetBackdropBorderColor(1, 0.25, 0)
     elseif TargetClassification == "elite" then
         TargetClassificationText:SetText("Elite")
-        TargetClassificationText:SetTextColor(1, 0.8, 0, 1)
-        TargetFrameBackdrop:SetBackdropBorderColor(1, 0.8, 0, 1)
-        TargetPortraitBackdrop:SetBackdropBorderColor(1, 0.8, 0, 1)
+        TargetClassificationText:SetTextColor(1, 0.8, 0)
+        TargetFrameBackdrop:SetBackdropBorderColor(1, 0.8, 0)
+        TargetPortraitBackdrop:SetBackdropBorderColor(1, 0.8, 0)
     elseif TargetClassification == "rare" then
         TargetClassificationText:SetText("Rare")
-        TargetClassificationText:SetTextColor(0.75, 0.75, 0.75, 1)
-        TargetFrameBackdrop:SetBackdropBorderColor(0.75, 0.75, 0.75, 1)
-        TargetPortraitBackdrop:SetBackdropBorderColor(0.75, 0.75, 0.75, 1)
+        TargetClassificationText:SetTextColor(0.8, 0.8, 0.8)
+        TargetFrameBackdrop:SetBackdropBorderColor(0.8, 0.8, 0.8)
+        TargetPortraitBackdrop:SetBackdropBorderColor(0.8, 0.8, 0.8)
     else
         TargetClassificationText:SetText("")
-        TargetFrameBackdrop:SetBackdropBorderColor(0.5, 0.5, 0.5, 1)
-        TargetPortraitBackdrop:SetBackdropBorderColor(0.5, 0.5, 0.5, 1)
+        TargetFrameBackdrop:SetBackdropBorderColor(0.5, 0.5, 0.5)
+        TargetPortraitBackdrop:SetBackdropBorderColor(0.5, 0.5, 0.5)
     end
 end
 
@@ -380,7 +384,7 @@ local function TargetThreatUpdate()
         if ThreatTanking or (ThreatStatus and ThreatStatus >= 2) then
             TargetThreatText:SetTextColor(1, 0.25, 0)
         elseif ThreatStatus == 1 then
-            TargetThreatText:SetTextColor(1, 1, 0)
+            TargetThreatText:SetTextColor(1, 0.8, 0)
         else
             TargetThreatText:SetTextColor(0.5, 0.5, 0.5)
         end
