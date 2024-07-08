@@ -5,7 +5,8 @@ local MicroMenuButtons = {
     QuestLogMicroButton, 
     WorldMapMicroButton, 
     SocialsMicroButton, 
-    MainMenuMicroButton
+    MainMenuMicroButton,
+    HelpMicroButton
 }
 
 local function ButtonsShow()
@@ -31,7 +32,6 @@ local function ButtonUpdate()
 
     CharacterMicroButton:ClearAllPoints()
     CharacterMicroButton:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 20, 0)
-    HelpMicroButton:Hide()
 end
 
 local MicroMenuEvents = CreateFrame("Frame")
