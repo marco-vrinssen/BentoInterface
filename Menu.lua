@@ -9,6 +9,10 @@ local MicroMenuButtons = {
     HelpMicroButton
 }
 
+if SocialsMicroButton then
+    table.insert(MicroMenuButtons, SocialsMicroButton)
+end
+
 local function ButtonsShow()
     for _, ButtonElement in ipairs(MicroMenuButtons) do
         UIFrameFadeIn(ButtonElement, 0.1, ButtonElement:GetAlpha(), 1)
@@ -28,6 +32,14 @@ local function ButtonUpdate()
 
         ButtonElement:SetScript("OnEnter", ButtonsShow)
         ButtonElement:SetScript("OnLeave", ButtonsHide)
+    end
+
+    if SocialsMicroButton then
+        SocialsMicroButton:SetAlpha(0.5)
+    end
+
+    if GuildMicroButton then
+        GuildMicroButton:SetAlpha(0.5)
     end
 
     CharacterMicroButton:ClearAllPoints()
