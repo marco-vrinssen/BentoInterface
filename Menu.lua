@@ -1,10 +1,10 @@
 local MicroMenuButtons = {
     CharacterMicroButton, 
+    SpellbookMicroButton,
     TalentMicroButton, 
-    SpellbookMicroButton, 
     QuestLogMicroButton, 
+    GuildMicroButton,
     WorldMapMicroButton, 
-    SocialsMicroButton, 
     MainMenuMicroButton,
     HelpMicroButton
 }
