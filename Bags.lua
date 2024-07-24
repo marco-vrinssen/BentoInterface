@@ -37,33 +37,58 @@ BagSlotEvents:SetScript("OnEvent", BagSlotUpdate)
 
 
 
-local function BagContainerUpdate()    
-    local OpenContainer = {}
-    local LastContainer = MainMenuBarBackpackButton
+local function BagContainerUpdate()
+    local OpenPlayerContainers = {}
+    local OpenBankContainers = {}
+    local LastPlayerContainer = MainMenuBarBackpackButton
+    local BankFrame = BankFrame
     
     for i = 0, NUM_BAG_FRAMES + NUM_BANKBAGSLOTS do
         local ContainerFrame = _G["ContainerFrame"..(i+1)]
         if ContainerFrame and ContainerFrame:IsShown() then
-            table.insert(OpenContainer, ContainerFrame)
+            if ContainerFrame:GetID() >= 5 then
+                table.insert(OpenBankContainers, ContainerFrame)
+            else
+                table.insert(OpenPlayerContainers, ContainerFrame)
+            end
         end
     end
     
-    for i, ContainerFrame in ipairs(OpenContainer) do
+    for i, ContainerFrame in ipairs(OpenPlayerContainers) do
         ContainerFrame:ClearAllPoints()
         if i == 1 then
-            ContainerFrame:SetPoint("BOTTOMRIGHT", LastContainer, "TOPRIGHT", 4, 4)
+            ContainerFrame:SetPoint("BOTTOMRIGHT", LastPlayerContainer, "TOPRIGHT", 4, 4)
         elseif i == 2 then
-            ContainerFrame:SetPoint("BOTTOM", OpenContainer[1], "TOP", 0, 8)
+            ContainerFrame:SetPoint("BOTTOM", OpenPlayerContainers[1], "TOP", 0, 8)
         elseif i == 3 then
-            ContainerFrame:SetPoint("BOTTOM", OpenContainer[2], "TOP", 0, 8)
+            ContainerFrame:SetPoint("BOTTOM", OpenPlayerContainers[2], "TOP", 0, 8)
         elseif i == 4 then
-            ContainerFrame:SetPoint("BOTTOMRIGHT", OpenContainer[2], "BOTTOMLEFT", -8, 0)
+            ContainerFrame:SetPoint("BOTTOMRIGHT", OpenPlayerContainers[2], "BOTTOMLEFT", -8, 0)
         elseif i == 5 then
-            ContainerFrame:SetPoint("BOTTOM", OpenContainer[4], "TOP", 0, 8)
+            ContainerFrame:SetPoint("BOTTOM", OpenPlayerContainers[4], "TOP", 0, 8)
         elseif i == 6 then
-            ContainerFrame:SetPoint("TOPRIGHT", OpenContainer[5], "TOPLEFT", -8, 0)
+            ContainerFrame:SetPoint("TOPRIGHT", OpenPlayerContainers[5], "TOPLEFT", -8, 0)
         else
-            ContainerFrame:SetPoint("TOPRIGHT", OpenContainer[i-1], "TOPLEFT", -8, 0)
+            ContainerFrame:SetPoint("TOPRIGHT", OpenPlayerContainers[i-1], "TOPLEFT", -8, 0)
+        end
+    end
+    
+    for i, ContainerFrame in ipairs(OpenBankContainers) do
+        ContainerFrame:ClearAllPoints()
+        if i == 1 then
+            ContainerFrame:SetPoint("TOPLEFT", BankFrame, "TOPRIGHT", 4, 0)
+        elseif i == 2 then
+            ContainerFrame:SetPoint("TOPLEFT", OpenBankContainers[1], "TOPRIGHT", 4, 0)
+        elseif i == 3 then
+            ContainerFrame:SetPoint("TOPLEFT", OpenBankContainers[2], "TOPRIGHT", 4, 0)
+        elseif i == 4 then
+            ContainerFrame:SetPoint("TOPLEFT", OpenBankContainers[1], "BOTTOMLEFT", 0, -8)
+        elseif i == 5 then
+            ContainerFrame:SetPoint("TOPLEFT", OpenBankContainers[4], "TOPRIGHT", 4, 0)
+        elseif i == 6 then
+            ContainerFrame:SetPoint("TOPLEFT", OpenBankContainers[5], "TOPRIGHT", 4, 0)
+        else
+            ContainerFrame:SetPoint("TOPLEFT", OpenBankContainers[i-1], "TOPRIGHT", 4, 0)
         end
     end
     
@@ -84,8 +109,6 @@ BagContainerEvents:RegisterEvent("BANKFRAME_CLOSED")
 BagContainerEvents:RegisterEvent("MERCHANT_SHOW")
 BagContainerEvents:RegisterEvent("MERCHANT_CLOSED")
 BagContainerEvents:SetScript("OnEvent", BagContainerUpdate)
-
-
 
 
 
