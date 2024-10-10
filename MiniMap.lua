@@ -161,19 +161,28 @@ MinimapBFEvents:SetScript("OnEvent", MinimapBFUpdate)
 
 local function MinimapTrackingUpdate()
     MiniMapTrackingBorder:Hide()
-    MiniMapTrackingFrame:ClearAllPoints()
-    MiniMapTrackingFrame:SetSize(16, 16)
-    MiniMapTrackingFrame:SetPoint("TOPRIGHT", MinimapContainerBackdrop, "TOPRIGHT", -2, -2)
+
+    MiniMapTracking:ClearAllPoints()
+    MiniMapTracking:SetSize(16, 16)
+    MiniMapTracking:SetPoint("TOPRIGHT", MinimapContainerBackdrop, "TOPRIGHT", -2, -2)
 
     MiniMapTrackingIcon:ClearAllPoints()
     MiniMapTrackingIcon:SetSize(16, 16)
     MiniMapTrackingIcon:SetPoint("TOPRIGHT", MinimapContainerBackdrop, "TOPRIGHT", -2, -2)
 end
 
+local function CheckAndUpdateMinimapTracking()
+    if MiniMapTracking then
+        MinimapTrackingUpdate()
+    else
+        C_Timer.After(1, CheckAndUpdateMinimapTracking)
+    end
+end
+
 local MinimapTrackingEvents = CreateFrame("Frame")
 MinimapTrackingEvents:RegisterEvent("PLAYER_ENTERING_WORLD")
 MinimapTrackingEvents:RegisterEvent("MINIMAP_UPDATE_TRACKING")
-MinimapTrackingEvents:SetScript("OnEvent", MinimapTrackingUpdate)
+MinimapTrackingEvents:SetScript("OnEvent", CheckAndUpdateMinimapTracking)
 
 
 
