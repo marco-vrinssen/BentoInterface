@@ -4,12 +4,14 @@ BentoUI = BentoUI or {}
 
 
 local function ConfigUpdate()
-    SetCVar("rawMouseEnable", 1)
-    SetCVar("WorldTextScale", 1.5)
     SetCVar("ffxGlow", 0)
     SetCVar("ffxDeath", 0)
     SetCVar("ffxNether", 0)
-    SetCVar("cameraDistanceMaxZoomFactor", 2)
+
+    SetCVar("WorldTextScale", 2)
+    SetCVar("cameraDistanceMaxZoomFactor", 2.4)
+
+    SetCVar("rawMouseEnable", 1)
 end
 
 local ConfigEvents = CreateFrame("Frame")
