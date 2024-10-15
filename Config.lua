@@ -8,8 +8,8 @@ local function ConfigUpdate()
     SetCVar("ffxDeath", 0)
     SetCVar("ffxNether", 0)
 
-    SetCVar("WorldTextScale", 2)
-    SetCVar("cameraDistanceMaxZoomFactor", 2.4)
+    SetCVar("WorldTextScale", 1.5)
+    SetCVar("cameraDistanceMaxZoomFactor", 3)
 
     SetCVar("rawMouseEnable", 1)
 end
